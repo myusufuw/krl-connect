@@ -1,54 +1,38 @@
-import "@/styles/globals.css";
-import { Metadata, Viewport } from "next";
-import clsx from "clsx";
+'use client'
 
-import { Providers } from "./providers";
+import '@/styles/globals.css'
+import clsx from 'clsx'
 
-import { siteConfig } from "@/config/site";
-import { fontSans } from "@/config/fonts";
-import { Navbar } from "@/components/navbar";
+import { Providers } from './providers'
 
-export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
-
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
-};
+import { fontSans } from '@/config/fonts'
+import Tab from '@/components/tab'
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html suppressHydrationWarning lang='en'>
       <head />
       <body
         className={clsx(
-          "min-h-screen text-foreground bg-background font-sans antialiased",
-          fontSans.variable,
+          'min-h-screen text-foreground bg-background font-sans antialiased',
+          fontSans.variable
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col h-screen">
-            <Navbar />
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+        <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
+          <div className='relative flex flex-col h-screen bg-slate-300'>
+            {/* <Navbar /> */}
+            <main className='container mx-auto max-w-2xl h-full px-4 relative bg-white'>
               {children}
+
+              <Tab />
             </main>
           </div>
         </Providers>
       </body>
     </html>
-  );
+  )
 }
