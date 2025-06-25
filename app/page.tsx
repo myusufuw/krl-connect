@@ -1,32 +1,41 @@
 'use client'
 
 import Greeting from '@/components/greeting'
-import { Autocomplete, AutocompleteItem } from '@heroui/autocomplete'
+import {
+  Autocomplete,
+  AutocompleteItem,
+  AutocompleteSection,
+} from '@heroui/autocomplete'
 import { generateHourlyStrings } from './lib/time'
 import { Button } from '@heroui/button'
-
-export const animals = [
-  {
-    label: 'Cat',
-    key: 'cat',
-    description: 'The second most popular pet in the world',
-  },
-  {
-    label: 'Dog',
-    key: 'dog',
-    description: 'The most popular pet in the world',
-  },
-  {
-    label: 'Elephant',
-    key: 'elephant',
-    description: 'The largest land animal',
-  },
-  { label: 'Lion', key: 'lion', description: 'The king of the jungle' },
-  { label: 'Tiger', key: 'tiger', description: 'The largest cat species' },
-  { label: 'Giraffe', key: 'giraffe', description: 'The tallest land animal' },
-]
+import { useKrlStation } from './hooks/useKrlStation'
+import { useState } from 'react'
+import {
+  TrainScheduleParams,
+  TrainScheduleParamsSchema,
+} from './schemas/krlStation'
 
 export default function Home() {
+  const { data, isLoading, isError } = useKrlStation()
+
+  const [searchScheduleFormObject, setSearchScheduleFormObject] =
+    useState<TrainScheduleParams>({
+      stationid: '',
+      timefrom: '',
+      timeto: '',
+    })
+
+  const handleFormObjectChange = (name: string, value: string) => {
+    setSearchScheduleFormObject((current) => ({
+      ...current,
+      [name]: value,
+    }))
+  }
+
+  const isButtonSearchDisabled = TrainScheduleParamsSchema.safeParse(
+    searchScheduleFormObject
+  ).success
+
   return (
     <div className='relative'>
       <Greeting />
@@ -41,11 +50,29 @@ export default function Home() {
           fullWidth
           size='sm'
           className='mt-4'
-          defaultItems={animals}
+          scrollShadowProps={{
+            isEnabled: false,
+          }}
           label='Select the station'
+          items={data ? data : []}
+          isLoading={isLoading}
+          onInputChange={(value) => handleFormObjectChange('stationid', value)}
         >
-          {(item) => (
-            <AutocompleteItem key={item?.key}>{item?.label}</AutocompleteItem>
+          {(data) => (
+            <AutocompleteSection
+              key={data.title}
+              title={data.title}
+              items={data.value}
+            >
+              {(stations) => (
+                <AutocompleteItem
+                  key={stations.sta_name}
+                  textValue={stations.sta_id}
+                >
+                  {stations.sta_name}
+                </AutocompleteItem>
+              )}
+            </AutocompleteSection>
           )}
         </Autocomplete>
 
@@ -55,9 +82,12 @@ export default function Home() {
             size='sm'
             defaultItems={generateHourlyStrings()}
             label='Start'
+            onInputChange={(value) => handleFormObjectChange('timefrom', value)}
           >
             {(item) => (
-              <AutocompleteItem key={item.value}>{item.value}</AutocompleteItem>
+              <AutocompleteItem key={item.value} textValue={item.value}>
+                {item.value}
+              </AutocompleteItem>
             )}
           </Autocomplete>
 
@@ -66,6 +96,7 @@ export default function Home() {
             size='sm'
             defaultItems={generateHourlyStrings()}
             label='End'
+            onInputChange={(value) => handleFormObjectChange('timeto', value)}
           >
             {(item) => (
               <AutocompleteItem key={item.value}>{item.value}</AutocompleteItem>
@@ -73,7 +104,13 @@ export default function Home() {
           </Autocomplete>
         </div>
 
-        <Button color='primary' fullWidth size='lg' radius='md'>
+        <Button
+          color='primary'
+          fullWidth
+          size='lg'
+          radius='md'
+          isDisabled={!isButtonSearchDisabled}
+        >
           Search Commuter Line
         </Button>
       </div>
