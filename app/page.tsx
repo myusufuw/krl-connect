@@ -1,13 +1,6 @@
 'use client'
 
 import Greeting from '@/components/greeting'
-import {
-  Autocomplete,
-  AutocompleteItem,
-  AutocompleteSection,
-} from '@heroui/autocomplete'
-import { generateHourlyStrings } from './lib/time'
-import { Button } from '@heroui/button'
 import { useKrlStation } from './hooks/useKrlStation'
 import React, { useState } from 'react'
 import {
@@ -17,13 +10,13 @@ import {
 import { useTrainSchedule } from './hooks/useTrainSchedule'
 import Loading from '@/components/loading'
 import ScheduleCard from '@/components/schedule-card'
-import { addToast } from '@heroui/toast'
 import { useToastOnError } from './hooks/useToastOnError'
+import CommuterSearchPanel from '@/components/commuter-seacrh-panel'
 
 export default function Home() {
   const {
-    data,
-    isLoading,
+    data: krlStationData,
+    isLoading: isKrlStationLoading,
     isError: isKrlStationError,
     error: krlStationError,
   } = useKrlStation()
@@ -52,7 +45,7 @@ export default function Home() {
     }))
   }
 
-  const isButtonSearchDisabled = TrainScheduleParamsSchema.safeParse(
+  const isSearchFormValid = TrainScheduleParamsSchema.safeParse(
     searchScheduleFormObject
   ).success
 
@@ -66,92 +59,13 @@ export default function Home() {
       <Greeting />
 
       {/* SEARCH PANEL */}
-      <div className='bg-white p-4 absolute top-[14%] rounded-2xl mx-4 shadow-md'>
-        <p className='font-medium text-2xl'>Where do you want to go?</p>
-        <p className='text-sm text-default-400'>
-          Explore new place, get new experience!
-        </p>
-
-        <Autocomplete
-          fullWidth
-          size='sm'
-          className='mt-4'
-          scrollShadowProps={{
-            isEnabled: false,
-          }}
-          label='Select the station'
-          isLoading={isLoading}
-          onSelectionChange={(value) =>
-            handleFormObjectChange('stationid', value)
-          }
-        >
-          {data ? (
-            data.map((data) => (
-              <AutocompleteSection
-                key={data?.title}
-                title={data?.title}
-                items={data?.value}
-              >
-                {(stations) => (
-                  <AutocompleteItem
-                    key={stations?.sta_id}
-                    textValue={stations?.sta_name}
-                  >
-                    {stations?.sta_name}
-                  </AutocompleteItem>
-                )}
-              </AutocompleteSection>
-            ))
-          ) : (
-            <></>
-          )}
-        </Autocomplete>
-
-        <div className='flex flex-row w-full justify-between gap-4 my-4'>
-          <Autocomplete
-            fullWidth
-            size='sm'
-            defaultItems={generateHourlyStrings()}
-            label='Start'
-            onInputChange={(value) => handleFormObjectChange('timefrom', value)}
-            scrollShadowProps={{
-              isEnabled: false,
-            }}
-          >
-            {(item) => (
-              <AutocompleteItem key={item.value} textValue={item.value}>
-                {item.value}
-              </AutocompleteItem>
-            )}
-          </Autocomplete>
-
-          <Autocomplete
-            fullWidth
-            size='sm'
-            defaultItems={generateHourlyStrings()}
-            label='End'
-            onInputChange={(value) => handleFormObjectChange('timeto', value)}
-            scrollShadowProps={{
-              isEnabled: false,
-            }}
-          >
-            {(item) => (
-              <AutocompleteItem key={item.value}>{item.value}</AutocompleteItem>
-            )}
-          </Autocomplete>
-        </div>
-
-        <Button
-          color='primary'
-          fullWidth
-          size='lg'
-          radius='md'
-          isDisabled={!isButtonSearchDisabled}
-          onPress={handleSearchButtonClick}
-        >
-          Search Commuter Line
-        </Button>
-      </div>
+      <CommuterSearchPanel
+        isKrlStationLoading={isKrlStationLoading}
+        handleFormObjectChange={handleFormObjectChange}
+        handleSubmitButtonClick={handleSearchButtonClick}
+        krlStationData={krlStationData}
+        isSubmitButtonEnabled={isSearchFormValid}
+      />
 
       {/* SCHEDULE LIST */}
       <div className='mt-[20vh] w-full px-4 h-[100%] pb-[90px] sm:pb-[30px] flex flex-col gap-4 justify-center items-center overflow-hidden'>
