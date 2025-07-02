@@ -23,9 +23,9 @@ export default function RootLayout({
         )}
       >
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
-          <div className='relative flex flex-col h-screen bg-slate-300'>
+          <div className='relative flex flex-col h-screen sm:bg-slate-900 overflow-hidden'>
             {/* <Navbar /> */}
-            <main className='container mx-auto max-w-2xl h-full px-4 relative bg-white'>
+            <main className='container mx-auto max-w-md h-full relative bg-white zoom-90'>
               {children}
 
               <Tab />
