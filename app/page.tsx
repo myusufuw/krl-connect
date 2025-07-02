@@ -9,15 +9,19 @@ import {
 import { generateHourlyStrings } from './lib/time'
 import { Button } from '@heroui/button'
 import { useKrlStation } from './hooks/useKrlStation'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
   TrainScheduleParams,
   TrainScheduleParamsSchema,
 } from './schemas/krlStation'
+import { useTrainSchedule } from './hooks/useTrainSchedule'
+import Loading from '@/components/loading'
+import ScheduleCard from '@/components/schedule-card'
 
 export default function Home() {
   const { data, isLoading, isError } = useKrlStation()
-
+  const { mutate, data: trainSchedules, isPending } = useTrainSchedule()
+  console.log(trainSchedules)
   const [searchScheduleFormObject, setSearchScheduleFormObject] =
     useState<TrainScheduleParams>({
       stationid: '',
@@ -25,7 +29,7 @@ export default function Home() {
       timeto: '',
     })
 
-  const handleFormObjectChange = (name: string, value: string) => {
+  const handleFormObjectChange = (name: string, value: React.Key | null) => {
     setSearchScheduleFormObject((current) => ({
       ...current,
       [name]: value,
@@ -36,11 +40,17 @@ export default function Home() {
     searchScheduleFormObject
   ).success
 
+  const handleSearchButtonClick = () => {
+    mutate(searchScheduleFormObject)
+  }
+
   return (
-    <div className='relative'>
+    <div className='relative flex flex-col h-screen'>
+      {/* GREETING */}
       <Greeting />
 
-      <div className='bg-white p-4 absolute top-[45%] rounded-2xl mx-4 shadow-md'>
+      {/* SEARCH PANEL */}
+      <div className='bg-white p-4 absolute top-[14%] rounded-2xl mx-4 shadow-md'>
         <p className='font-medium text-2xl'>Where do you want to go?</p>
         <p className='text-sm text-default-400'>
           Explore new place, get new experience!
@@ -54,25 +64,30 @@ export default function Home() {
             isEnabled: false,
           }}
           label='Select the station'
-          items={data ? data : []}
           isLoading={isLoading}
-          onInputChange={(value) => handleFormObjectChange('stationid', value)}
+          onSelectionChange={(value) =>
+            handleFormObjectChange('stationid', value)
+          }
         >
-          {(data) => (
-            <AutocompleteSection
-              key={data.title}
-              title={data.title}
-              items={data.value}
-            >
-              {(stations) => (
-                <AutocompleteItem
-                  key={stations.sta_name}
-                  textValue={stations.sta_id}
-                >
-                  {stations.sta_name}
-                </AutocompleteItem>
-              )}
-            </AutocompleteSection>
+          {data ? (
+            data.map((data) => (
+              <AutocompleteSection
+                key={data?.title}
+                title={data?.title}
+                items={data?.value}
+              >
+                {(stations) => (
+                  <AutocompleteItem
+                    key={stations?.sta_id}
+                    textValue={stations?.sta_name}
+                  >
+                    {stations?.sta_name}
+                  </AutocompleteItem>
+                )}
+              </AutocompleteSection>
+            ))
+          ) : (
+            <></>
           )}
         </Autocomplete>
 
@@ -83,6 +98,9 @@ export default function Home() {
             defaultItems={generateHourlyStrings()}
             label='Start'
             onInputChange={(value) => handleFormObjectChange('timefrom', value)}
+            scrollShadowProps={{
+              isEnabled: false,
+            }}
           >
             {(item) => (
               <AutocompleteItem key={item.value} textValue={item.value}>
@@ -97,6 +115,9 @@ export default function Home() {
             defaultItems={generateHourlyStrings()}
             label='End'
             onInputChange={(value) => handleFormObjectChange('timeto', value)}
+            scrollShadowProps={{
+              isEnabled: false,
+            }}
           >
             {(item) => (
               <AutocompleteItem key={item.value}>{item.value}</AutocompleteItem>
@@ -110,9 +131,23 @@ export default function Home() {
           size='lg'
           radius='md'
           isDisabled={!isButtonSearchDisabled}
+          onPress={handleSearchButtonClick}
         >
           Search Commuter Line
         </Button>
+      </div>
+
+      {/* SCHEDULE LIST */}
+      <div className='mt-[20vh] w-full px-4 h-[34%] flex flex-col gap-4 justify-center items-center overflow-hidden'>
+        {isPending ? (
+          <Loading />
+        ) : (
+          <div className='flex flex-col pb-2 h-full w-full gap-4 overflow-y-auto no-scrollbar'>
+            {trainSchedules?.map((item, index) => (
+              <ScheduleCard key={index} train={item} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
