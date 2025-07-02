@@ -17,11 +17,27 @@ import {
 import { useTrainSchedule } from './hooks/useTrainSchedule'
 import Loading from '@/components/loading'
 import ScheduleCard from '@/components/schedule-card'
+import { addToast } from '@heroui/toast'
+import { useToastOnError } from './hooks/useToastOnError'
 
 export default function Home() {
-  const { data, isLoading, isError } = useKrlStation()
-  const { mutate, data: trainSchedules, isPending } = useTrainSchedule()
-  console.log(trainSchedules)
+  const {
+    data,
+    isLoading,
+    isError: isKrlStationError,
+    error: krlStationError,
+  } = useKrlStation()
+  const {
+    mutate,
+    data: trainSchedules,
+    isPending,
+    isError: isTrainScheduleError,
+    error: trainScheduleError,
+  } = useTrainSchedule()
+
+  useToastOnError(trainScheduleError, isTrainScheduleError)
+  useToastOnError(krlStationError, isKrlStationError)
+
   const [searchScheduleFormObject, setSearchScheduleFormObject] =
     useState<TrainScheduleParams>({
       stationid: '',
