@@ -10,7 +10,7 @@ const ScheduleCard = ({ train }: { train: TrainScheduleResponse }) => {
     },
     {
       icon: 'mdi:clock-outline',
-      content: train.time_est,
+      content: `${train.time_est} WIB`,
     },
     {
       icon: 'fa6-solid:route',
