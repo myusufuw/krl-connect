@@ -138,11 +138,11 @@ export default function Home() {
       </div>
 
       {/* SCHEDULE LIST */}
-      <div className='mt-[20vh] w-full px-4 h-[34%] flex flex-col gap-4 justify-center items-center overflow-hidden'>
+      <div className='mt-[20vh] w-full px-4 h-[100%] pb-[90px] sm:pb-[30px] flex flex-col gap-4 justify-center items-center overflow-hidden'>
         {isPending ? (
           <Loading />
         ) : (
-          <div className='flex flex-col pb-2 h-full w-full gap-4 overflow-y-auto no-scrollbar'>
+          <div className='flex flex-col pb-2 h-full w-full gap-4 overflow-y-auto overflow-x-hidden no-scrollbar'>
             {trainSchedules?.map((item, index) => (
               <ScheduleCard key={index} train={item} />
             ))}
