@@ -69,7 +69,7 @@ const TicketPrice = () => {
       />
 
       {/* SCHEDULE PRICE */}
-      <div className='mt-[22vh] w-full px-4 flex flex-col items-center overflow-hidden'>
+      <div className='mt-[24vh] w-full px-4 flex flex-col items-center overflow-hidden'>
         {ticketPriceData && (
           <TicketPriceCard
             ticketPriceData={ticketPriceData ? ticketPriceData[0] : undefined}

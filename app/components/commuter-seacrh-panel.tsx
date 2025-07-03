@@ -41,7 +41,7 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
   const isHomePageVariant = variant === 'home'
 
   return (
-    <div className='bg-white p-4 absolute top-[14%] rounded-2xl mx-4 shadow-md'>
+    <div className='bg-white p-4 absolute top-[16%] rounded-2xl mx-4 shadow-md'>
       <p className='font-medium text-2xl text-center'>{title}</p>
       {isHomePageVariant && (
         <p className='text-sm text-default-400 text-center'>{description}</p>

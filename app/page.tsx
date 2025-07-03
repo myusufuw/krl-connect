@@ -69,7 +69,7 @@ export default function Home() {
       />
 
       {/* SCHEDULE LIST */}
-      <div className='mt-[20vh] w-full px-4 h-[100%] pb-[90px] sm:pb-[30px] flex flex-col gap-4 justify-center items-center overflow-hidden'>
+      <div className='mt-[22vh] w-full px-4 h-[100%] pb-[90px] sm:pb-[30px] flex flex-col gap-4 justify-center items-center overflow-hidden'>
         {isPending ? (
           <Loading />
         ) : (
