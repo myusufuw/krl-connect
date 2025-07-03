@@ -1,53 +1,53 @@
-# Next.js & HeroUI Template
+# 🚆 KRL Connect: Your Schedule in Your Hand
 
-This is a template for creating applications using Next.js 14 (app directory) and HeroUI (v2).
+KRL Connect is a web application designed to help commuters in Indonesia easily access real-time commuter line schedules, check ticket fares, and explore a complete interactive route map. Whether you're a daily worker, a tourist, or just planning a trip, KRL Connect puts the information you need right at your fingertips.
 
-[Try it on CodeSandbox](https://githubbox.com/heroui-inc/heroui/next-app-template)
+---
 
-## Technologies Used
+## 🌐 Live Demo
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [HeroUI v2](https://heroui.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+🔗 [https://krl-connect.myusufuw.com](https://krl-connect.myusufuw.com)
 
-## How to Use
+---
 
-### Use the template with create-next-app
+## ✨ Features
 
-To create a new project based on this template using `create-next-app`, run the following command:
+- 🔍 **Schedule Search** – Find train schedules across Indonesia with ease.
+- 💸 **Fare Checker** – Instantly calculate ticket prices between stations.
+- 🗺️ **Interactive Route Map** – Explore the full commuter line network visually.
+- ⚡ **Real-Time Data** – Powered by [commuterline.id](https://commuterline.id/) for up-to-date information.
+- 📱 **Responsive Design** – Optimized for mobile devices.
+
+---
+
+## 🛠️ Tech Stack
+
+- 🧑‍💻 **Language**: TypeScript
+- ⚙️ **Framework**: Next.js
+- 🔄 **State Management**: React Query
+- ✅ **Validation**: Zod
+- 🎨 **UI Components**: Hero UI
+- 🔌 **HTTP Client**: Axios
+- 🕒 **Date Handling**: Moment.js
+
+---
+
+## 🚀 Getting Started
+
+To run this project locally, follow these steps:
 
 ```bash
-npx create-next-app -e https://github.com/heroui-inc/next-app-template
-```
+# 1. Clone the repository
+git clone https://github.com/your-username/krl-connect.git
 
-### Install dependencies
+# 2. Navigate into the project directory
+cd krl-connect
 
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
-
-```bash
+# 3. Install dependencies
 npm install
-```
 
-### Run the development server
-
-```bash
+# 4. Run the development server
 npm run dev
+
+# 5. Then open http://localhost:3000 in your browser.
 ```
-
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@heroui/*
-```
-
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
-
-## License
-
-Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
