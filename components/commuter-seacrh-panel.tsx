@@ -15,6 +15,9 @@ type CommuterSearchPanelProps = {
   isSubmitButtonEnabled: boolean
   handleSubmitButtonClick: () => void
   isButtonSubmitLoading: boolean
+  variant?: 'home' | 'ticket-price'
+  title?: string
+  description?: string
 }
 
 type KrlStationData = {
@@ -30,14 +33,19 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
     isSubmitButtonEnabled,
     handleSubmitButtonClick,
     isButtonSubmitLoading,
+    variant = 'home',
+    title = 'Where do you want to go?',
+    description = 'Explore new place, get new experience!',
   } = props
+
+  const isHomePageVariant = variant === 'home'
 
   return (
     <div className='bg-white p-4 absolute top-[14%] rounded-2xl mx-4 shadow-md'>
-      <p className='font-medium text-2xl'>Where do you want to go?</p>
-      <p className='text-sm text-default-400'>
-        Explore new place, get new experience!
-      </p>
+      <p className='font-medium text-2xl text-center'>{title}</p>
+      {isHomePageVariant && (
+        <p className='text-sm text-default-400 text-center'>{description}</p>
+      )}
 
       <Autocomplete
         fullWidth
@@ -46,10 +54,13 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
         scrollShadowProps={{
           isEnabled: false,
         }}
-        label='Select the station'
+        label={isHomePageVariant ? 'Select the station' : 'From'}
         isLoading={isKrlStationLoading}
         onSelectionChange={(value) =>
-          handleFormObjectChange('stationid', value)
+          handleFormObjectChange(
+            isHomePageVariant ? 'stationid' : 'stationfrom',
+            value
+          )
         }
       >
         {krlStationData ? (
@@ -74,39 +85,78 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
         )}
       </Autocomplete>
 
-      <div className='flex flex-row w-full justify-between gap-4 my-4'>
+      {!isHomePageVariant && (
         <Autocomplete
           fullWidth
           size='sm'
-          defaultItems={generateHourlyStrings()}
-          label='Start'
-          onInputChange={(value) => handleFormObjectChange('timefrom', value)}
+          className='mt-4 mb-4'
           scrollShadowProps={{
             isEnabled: false,
           }}
+          label='To'
+          isLoading={isKrlStationLoading}
+          onSelectionChange={(value) =>
+            handleFormObjectChange('stationto', value)
+          }
         >
-          {(item) => (
-            <AutocompleteItem key={item.value} textValue={item.value}>
-              {item.value}
-            </AutocompleteItem>
+          {krlStationData ? (
+            krlStationData.map((data) => (
+              <AutocompleteSection
+                key={data?.title}
+                title={data?.title}
+                items={data?.value}
+              >
+                {(stations) => (
+                  <AutocompleteItem
+                    key={stations?.sta_id}
+                    textValue={stations?.sta_name}
+                  >
+                    {stations?.sta_name}
+                  </AutocompleteItem>
+                )}
+              </AutocompleteSection>
+            ))
+          ) : (
+            <></>
           )}
         </Autocomplete>
+      )}
 
-        <Autocomplete
-          fullWidth
-          size='sm'
-          defaultItems={generateHourlyStrings()}
-          label='End'
-          onInputChange={(value) => handleFormObjectChange('timeto', value)}
-          scrollShadowProps={{
-            isEnabled: false,
-          }}
-        >
-          {(item) => (
-            <AutocompleteItem key={item.value}>{item.value}</AutocompleteItem>
-          )}
-        </Autocomplete>
-      </div>
+      {isHomePageVariant && (
+        <div className='flex flex-row w-full justify-between gap-4 my-4'>
+          <Autocomplete
+            fullWidth
+            size='sm'
+            defaultItems={generateHourlyStrings()}
+            label='Start'
+            onInputChange={(value) => handleFormObjectChange('timefrom', value)}
+            scrollShadowProps={{
+              isEnabled: false,
+            }}
+          >
+            {(item) => (
+              <AutocompleteItem key={item.value} textValue={item.value}>
+                {item.value}
+              </AutocompleteItem>
+            )}
+          </Autocomplete>
+
+          <Autocomplete
+            fullWidth
+            size='sm'
+            defaultItems={generateHourlyStrings()}
+            label='End'
+            onInputChange={(value) => handleFormObjectChange('timeto', value)}
+            scrollShadowProps={{
+              isEnabled: false,
+            }}
+          >
+            {(item) => (
+              <AutocompleteItem key={item.value}>{item.value}</AutocompleteItem>
+            )}
+          </Autocomplete>
+        </div>
+      )}
 
       <Button
         color='primary'
@@ -117,7 +167,7 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
         onPress={handleSubmitButtonClick}
         isLoading={isButtonSubmitLoading}
       >
-        Search Commuter Line
+        {isHomePageVariant ? 'Search Commuter Line' : 'Submit'}
       </Button>
     </div>
   )
