@@ -1,13 +1,14 @@
 'use client'
 
-import React from 'react'
-import Greeting from '../components/greeting'
-import { useCommuterMap } from '../hooks/useCommuterMap'
-import Loading from '../components/loading'
 import clsx from 'clsx'
+import Greeting from '../components/greeting'
+import Loading from '../components/loading'
+import { useCommuterMap } from '../hooks/useCommuterMap'
+import { useToastOnError } from '../hooks/useToastOnError'
 
 const CommuterMap = () => {
-  const { data, isLoading, error } = useCommuterMap()
+  const { data, isLoading, error, isError } = useCommuterMap()
+  useToastOnError(error, isError)
 
   return (
     <div className='relative flex flex-col h-screen'>
@@ -33,6 +34,12 @@ const CommuterMap = () => {
                 className='border rounded-lg shadow-md'
               />
             ))}
+
+            {isError && (
+              <div className='h-full flex items-center justify-center'>
+                <p className='text-xl text-default-900'>Data Not Found</p>
+              </div>
+            )}
           </>
         )}
       </div>
