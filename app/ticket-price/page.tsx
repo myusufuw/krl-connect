@@ -1,7 +1,7 @@
 'use client'
 
-import CommuterSearchPanel from '@/components/commuter-seacrh-panel'
-import Greeting from '@/components/greeting'
+import CommuterSearchPanel from '@/app/components/commuter-seacrh-panel'
+import Greeting from '@/app/components/greeting'
 import React, { useState } from 'react'
 import { useKrlStation } from '../hooks/useKrlStation'
 import { useToastOnError } from '../hooks/useToastOnError'
@@ -10,7 +10,7 @@ import {
   TicketPrice as TypeTicketPrice,
 } from '../schemas/ticket-price'
 import { useTicketPrice } from '../hooks/useTicketPrice'
-import TicketPriceCard from '@/components/ticket-price-card'
+import TicketPriceCard from '@/app/components/ticket-price-card'
 
 const TicketPrice = () => {
   const {

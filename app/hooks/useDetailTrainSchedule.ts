@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import axiosPublic from '../api/axios'
-import { DetailTrainScheduleParams } from '../schemas/krlStation'
+import { DetailTrainScheduleParams } from '../schemas/commuter-schedule'
 
 const fetchDetailTrainSchedule = async (params: {
   trainid: string | null

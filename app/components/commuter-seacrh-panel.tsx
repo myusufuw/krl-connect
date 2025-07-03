@@ -1,6 +1,6 @@
 import React from 'react'
 import { generateHourlyStrings } from '@/app/lib/time'
-import { KrlStation } from '@/app/schemas/krlStation'
+import { KrlStation } from '@/app/schemas/commuter-schedule'
 import {
   Autocomplete,
   AutocompleteItem,

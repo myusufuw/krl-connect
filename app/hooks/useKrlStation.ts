@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import axiosPublic from '../api/axios'
-import { KrlStationResponseSchema, KrlStation } from '../schemas/krlStation'
+import {
+  KrlStationResponseSchema,
+  KrlStation,
+} from '../schemas/commuter-schedule'
 
 type currentGroup = {
   title: string
