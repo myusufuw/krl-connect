@@ -43,5 +43,7 @@ export const useKrlStation = () => {
   return useQuery({
     queryKey: ['station-list'],
     queryFn: fetchStationList,
+    staleTime: 1000 * 60 * 10,
+    refetchOnWindowFocus: false,
   })
 }
