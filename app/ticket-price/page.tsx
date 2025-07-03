@@ -5,7 +5,12 @@ import Greeting from '@/components/greeting'
 import React, { useState } from 'react'
 import { useKrlStation } from '../hooks/useKrlStation'
 import { useToastOnError } from '../hooks/useToastOnError'
-import { TicketPrice as TypeTicketPrice } from '../schemas/ticket-price'
+import {
+  TicketPriceSchema,
+  TicketPrice as TypeTicketPrice,
+} from '../schemas/ticket-price'
+import { useTicketPrice } from '../hooks/useTicketPrice'
+import TicketPriceCard from '@/components/ticket-price-card'
 
 const TicketPrice = () => {
   const {
@@ -15,7 +20,16 @@ const TicketPrice = () => {
     error: krlStationError,
   } = useKrlStation()
 
+  const {
+    mutate,
+    isPending,
+    isError: isTicketPriceError,
+    error: ticketPriceError,
+    data: ticketPriceData,
+  } = useTicketPrice()
+
   useToastOnError(krlStationError, isKrlStationError)
+  useToastOnError(ticketPriceError, isTicketPriceError)
 
   const [ticketPriceFormData, setTicketPriceFormData] =
     useState<TypeTicketPrice>({
@@ -31,11 +45,12 @@ const TicketPrice = () => {
   }
 
   const handleCheckTicketPrice = () => {
-    // mutate(searchScheduleFormObject)
+    mutate(ticketPriceFormData)
   }
 
-  const isCheckTicketPriceFormValid = true
-  console.log(ticketPriceFormData)
+  const isCheckTicketPriceFormValid =
+    TicketPriceSchema.safeParse(ticketPriceFormData).success
+
   return (
     <div className='relative flex flex-col h-screen'>
       {/* GREETING */}
@@ -48,10 +63,25 @@ const TicketPrice = () => {
         handleSubmitButtonClick={handleCheckTicketPrice}
         krlStationData={krlStationData}
         isSubmitButtonEnabled={isCheckTicketPriceFormValid}
-        isButtonSubmitLoading={false}
+        isButtonSubmitLoading={isPending}
         variant='ticket-price'
         title='Find the Best Fares for Your Journey'
       />
+
+      {/* SCHEDULE PRICE */}
+      <div className='mt-[22vh] w-full px-4 flex flex-col items-center overflow-hidden'>
+        {ticketPriceData && (
+          <TicketPriceCard
+            ticketPriceData={ticketPriceData ? ticketPriceData[0] : undefined}
+          />
+        )}
+
+        {isTicketPriceError && (
+          <div className='h-full flex items-center justify-center mt-10'>
+            <p className='text-xl text-default-900'>Data Not Found</p>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
