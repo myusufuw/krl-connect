@@ -2,6 +2,14 @@
 
 KRL Connect is a web application designed to help commuters in Indonesia easily access real-time commuter line schedules, check ticket fares, and explore a complete interactive route map. Whether you're a daily worker, a tourist, or just planning a trip, KRL Connect puts the information you need right at your fingertips.
 
+![iPhone 13 Pro - Sierra Blue](https://github.com/user-attachments/assets/a085ec1e-0c76-4a17-8008-b4d82749f764)
+
+---
+## 🎨 Design Prototype
+
+You can explore the UI/UX design of KRL Connect on Figma:
+
+🔗 [View Figma Design](https://www.figma.com/design/HTmw2gAtv15EsqJyL8wila/KRL-Connect?node-id=0-1&t=rawxrgHn7VdSMGnO-1)
 ---
 
 ## 🌐 Live Demo
