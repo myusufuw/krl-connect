@@ -77,6 +77,12 @@ export default function Home() {
             {trainSchedules?.map((item, index) => (
               <ScheduleCard key={index} schedule={item} />
             ))}
+
+            {isTrainScheduleError && (
+              <div className='h-full flex items-center justify-center'>
+                <p className='text-xl text-default-900'>Data Not Found</p>
+              </div>
+            )}
           </div>
         )}
       </div>
