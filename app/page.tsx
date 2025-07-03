@@ -1,17 +1,17 @@
 'use client'
 
-import Greeting from '@/components/greeting'
+import Greeting from '@/app/components/greeting'
 import { useKrlStation } from './hooks/useKrlStation'
 import React, { useState } from 'react'
 import {
   TrainScheduleParams,
   TrainScheduleParamsSchema,
-} from './schemas/krlStation'
+} from './schemas/commuter-schedule'
 import { useTrainSchedule } from './hooks/useTrainSchedule'
-import Loading from '@/components/loading'
-import ScheduleCard from '@/components/schedule-card'
+import Loading from '@/app/components/loading'
+import ScheduleCard from '@/app/components/schedule-card'
 import { useToastOnError } from './hooks/useToastOnError'
-import CommuterSearchPanel from '@/components/commuter-seacrh-panel'
+import CommuterSearchPanel from '@/app/components/commuter-seacrh-panel'
 
 export default function Home() {
   const {
@@ -69,7 +69,7 @@ export default function Home() {
       />
 
       {/* SCHEDULE LIST */}
-      <div className='mt-[20vh] w-full px-4 h-[100%] pb-[90px] sm:pb-[30px] flex flex-col gap-4 justify-center items-center overflow-hidden'>
+      <div className='mt-[22vh] w-full px-4 h-[100%] pb-[90px] sm:pb-[30px] flex flex-col gap-4 justify-center items-center overflow-hidden'>
         {isPending ? (
           <Loading />
         ) : (

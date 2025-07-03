@@ -1,6 +1,6 @@
 'use client'
 
-import Loading from '@/components/loading'
+import Loading from '@/app/components/loading'
 import { Icon } from '@iconify/react'
 import moment from 'moment'
 import Link from 'next/link'

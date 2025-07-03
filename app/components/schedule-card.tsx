@@ -1,4 +1,4 @@
-import { TrainScheduleResponse } from '@/app/schemas/krlStation'
+import { TrainScheduleResponse } from '@/app/schemas/commuter-schedule'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import React from 'react'

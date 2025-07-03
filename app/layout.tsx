@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import { Providers } from './providers'
 
 import { fontSans } from '@/config/fonts'
-import Tab from '@/components/tab'
+import Tab from '@/app/components/tab'
 
 export default function RootLayout({
   children,

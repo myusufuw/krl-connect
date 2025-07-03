@@ -3,7 +3,7 @@ import {
   TrainScheduleParams,
   TrainScheduleParamsSchema,
   TrainScheduleResponse,
-} from '../schemas/krlStation'
+} from '../schemas/commuter-schedule'
 import axiosPublic from '../api/axios'
 
 const fetchTrainSchedule = async (

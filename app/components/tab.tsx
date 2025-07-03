@@ -13,11 +13,11 @@ const tabList = [
   },
   {
     icon: 'material-symbols:map-outline-sharp',
-    href: '/ticket-price',
+    href: '/commuter-map',
   },
   {
     icon: 'tdesign:money',
-    href: '/commuter-map',
+    href: '/ticket-price',
   },
 ]
 
@@ -25,7 +25,7 @@ const Tab = () => {
   const path = usePathname()
 
   return (
-    <div className='absolute bottom-0 w-full left-0 bg-blue-500 h-[90px] rounded-t-2xl flex justify-center items-center p-5'>
+    <div className='absolute bottom-0 w-full left-0 bg-primary-500 h-[90px] rounded-t-2xl flex justify-center items-center p-5'>
       <div className='w-full flex justify-around'>
         {tabList.map((item, index) => (
           <Link
@@ -33,7 +33,7 @@ const Tab = () => {
             key={index}
             className={clsx(
               'w-[90px] flex h-[60px] justify-center items-center rounded-lg transition-all duration-500 transform',
-              path === item.href ? 'bg-blue-400' : ''
+              path === item.href ? 'bg-primary-400' : ''
             )}
           >
             <Icon
