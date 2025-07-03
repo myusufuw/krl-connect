@@ -65,6 +65,7 @@ export default function Home() {
         handleSubmitButtonClick={handleSearchButtonClick}
         krlStationData={krlStationData}
         isSubmitButtonEnabled={isSearchFormValid}
+        isButtonSubmitLoading={isPending}
       />
 
       {/* SCHEDULE LIST */}
@@ -74,8 +75,14 @@ export default function Home() {
         ) : (
           <div className='flex flex-col pb-2 h-full w-full gap-4 overflow-y-auto overflow-x-hidden no-scrollbar'>
             {trainSchedules?.map((item, index) => (
-              <ScheduleCard key={index} train={item} />
+              <ScheduleCard key={index} schedule={item} />
             ))}
+
+            {isTrainScheduleError && (
+              <div className='h-full flex items-center justify-center'>
+                <p className='text-xl text-default-900'>Data Not Found</p>
+              </div>
+            )}
           </div>
         )}
       </div>

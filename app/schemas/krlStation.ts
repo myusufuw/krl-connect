@@ -32,3 +32,18 @@ export const TrainScheduleResponseSchema = z.object({
 })
 
 export type TrainScheduleResponse = z.infer<typeof TrainScheduleResponseSchema>
+
+export const DetailTrainScheduleParamsSchema = z.object({
+  train_id: z.string(),
+  ka_name: z.string(),
+  station_id: z.string(),
+  station_name: z.string(),
+  time_est: z.string(),
+  transit_station: z.boolean(),
+  color: z.string(),
+  transit: z.array(z.string()),
+})
+
+export type DetailTrainScheduleParams = z.infer<
+  typeof DetailTrainScheduleParamsSchema
+>

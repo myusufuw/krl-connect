@@ -1,20 +1,21 @@
 import { TrainScheduleResponse } from '@/app/schemas/krlStation'
 import { Icon } from '@iconify/react'
+import Link from 'next/link'
 import React from 'react'
 
-const ScheduleCard = ({ train }: { train: TrainScheduleResponse }) => {
+const ScheduleCard = ({ schedule }: { schedule: TrainScheduleResponse }) => {
   const trainInformationList = [
     {
       icon: 'material-symbols:train-outline',
-      content: `${train.ka_name} - ${train.train_id}`,
+      content: `${schedule.ka_name} - ${schedule.train_id}`,
     },
     {
       icon: 'mdi:clock-outline',
-      content: `${train.time_est} WIB`,
+      content: `${schedule.time_est} WIB`,
     },
     {
       icon: 'fa6-solid:route',
-      content: train.route_name,
+      content: schedule.route_name,
     },
   ]
 
@@ -28,12 +29,13 @@ const ScheduleCard = ({ train }: { train: TrainScheduleResponse }) => {
           </div>
         ))}
       </div>
-      <button
-        className='transform -rotate-90 absolute -right-7 top-7 rounded-b-md w-[97px] text-white py-2'
-        style={{ backgroundColor: train.color }}
+      <Link
+        href={`/detail-schedule?commuterName=${schedule.ka_name}&commuterId=${schedule.train_id}`}
+        className='transform -rotate-90 absolute -right-7 top-7 rounded-b-md w-[97px] text-white py-2 flex items-center justify-center'
+        style={{ backgroundColor: schedule.color }}
       >
         DETAIL
-      </button>
+      </Link>
     </div>
   )
 }

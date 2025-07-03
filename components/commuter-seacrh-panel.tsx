@@ -14,6 +14,7 @@ type CommuterSearchPanelProps = {
   krlStationData: KrlStationData[] | undefined
   isSubmitButtonEnabled: boolean
   handleSubmitButtonClick: () => void
+  isButtonSubmitLoading: boolean
 }
 
 type KrlStationData = {
@@ -28,6 +29,7 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
     krlStationData,
     isSubmitButtonEnabled,
     handleSubmitButtonClick,
+    isButtonSubmitLoading,
   } = props
 
   return (
@@ -113,6 +115,7 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
         radius='md'
         isDisabled={!isSubmitButtonEnabled}
         onPress={handleSubmitButtonClick}
+        isLoading={isButtonSubmitLoading}
       >
         Search Commuter Line
       </Button>
