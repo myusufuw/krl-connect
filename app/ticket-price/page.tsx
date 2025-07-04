@@ -1,14 +1,16 @@
 'use client'
 
 import React, { useState } from 'react'
+import clsx from 'clsx'
 
 import { useKrlStation } from '../hooks/useKrlStation'
 import { useToastOnError } from '../hooks/useToastOnError'
 import {
   TicketPriceSchema,
-  TicketPrice as TypeTicketPrice,
+  TicketPrice as TypeTicketPrice
 } from '../schemas/ticket-price'
 import { useTicketPrice } from '../hooks/useTicketPrice'
+import { useAppContext } from '../context/app-context'
 
 import Greeting from '@/app/components/greeting'
 import CommuterSearchPanel from '@/app/components/commuter-seacrh-panel'
@@ -19,7 +21,7 @@ const TicketPrice = () => {
     data: krlStationData,
     isLoading: isKrlStationLoading,
     isError: isKrlStationError,
-    error: krlStationError,
+    error: krlStationError
   } = useKrlStation()
 
   const {
@@ -27,27 +29,34 @@ const TicketPrice = () => {
     isPending,
     isError: isTicketPriceError,
     error: ticketPriceError,
-    data: ticketPriceData,
+    data: ticketPriceData
   } = useTicketPrice()
 
   useToastOnError(krlStationError, isKrlStationError)
   useToastOnError(ticketPriceError, isTicketPriceError)
 
+  const { isSearchPanelExpanded, setIsSearchPanelExpanded } = useAppContext()
+
   const [ticketPriceFormData, setTicketPriceFormData] =
     useState<TypeTicketPrice>({
       stationfrom: '',
-      stationto: '',
+      stationto: ''
     })
 
   const handleFormObjectChange = (name: string, value: React.Key | null) => {
     setTicketPriceFormData((current) => ({
       ...current,
-      [name]: value,
+      [name]: value
     }))
   }
 
   const handleCheckTicketPrice = () => {
-    mutate(ticketPriceFormData)
+    mutate(ticketPriceFormData, {
+      onSuccess: () =>
+        setTimeout(() => {
+          setIsSearchPanelExpanded(false)
+        }, 1000)
+    })
   }
 
   const isCheckTicketPriceFormValid =
@@ -71,7 +80,12 @@ const TicketPrice = () => {
       />
 
       {/* SCHEDULE PRICE */}
-      <div className='mt-[24vh] w-full px-4 flex flex-col items-center overflow-hidden'>
+      <div
+        className={clsx(
+          'w-full px-4 flex flex-col items-center overflow-hidden transition-all duration-500',
+          isSearchPanelExpanded ? 'mt-[25vh]' : 'mt-[12vh]'
+        )}
+      >
         {ticketPriceData && (
           <TicketPriceCard
             ticketPriceData={ticketPriceData ? ticketPriceData[0] : undefined}
