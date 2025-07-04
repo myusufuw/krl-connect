@@ -40,9 +40,11 @@ You can explore the UI/UX design of KRL Connect on Figma:
 - ⚙️ **Framework**: Next.js
 - 🔄 **State Management**: React Query
 - ✅ **Validation**: Zod
+- 🧹 **Linting**: ESLint
 - 🎨 **UI Components**: Hero UI
 - 🔌 **HTTP Client**: Axios
 - 🕒 **Date Handling**: Moment.js
+- ⚛️ **React Context**: For providing global values.
 
 ---
 

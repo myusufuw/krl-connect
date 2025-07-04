@@ -3,12 +3,12 @@ import { useMutation } from '@tanstack/react-query'
 import {
   TicketPrice,
   TicketPriceResponse,
-  TicketPriceSchema,
+  TicketPriceSchema
 } from '../schemas/ticket-price'
 import axiosPublic from '../api/axios'
 
 const fetchTicketPrice = async (
-  params: TicketPrice,
+  params: TicketPrice
 ): Promise<TicketPriceResponse[]> => {
   const parsed = TicketPriceSchema.safeParse(params)
 
@@ -21,11 +21,11 @@ const fetchTicketPrice = async (
   const response = await axiosPublic.get('/fare', {
     params: {
       stationfrom,
-      stationto,
+      stationto
     },
     headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-    },
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
+    }
   })
 
   return response.data.data
@@ -33,6 +33,6 @@ const fetchTicketPrice = async (
 
 export const useTicketPrice = () => {
   return useMutation({
-    mutationFn: fetchTicketPrice,
+    mutationFn: fetchTicketPrice
   })
 }

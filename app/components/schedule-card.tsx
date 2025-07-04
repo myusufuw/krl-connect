@@ -8,16 +8,16 @@ const ScheduleCard = ({ schedule }: { schedule: TrainScheduleResponse }) => {
   const trainInformationList = [
     {
       icon: 'material-symbols:train-outline',
-      content: `${schedule.ka_name} - ${schedule.train_id}`,
+      content: `${schedule.ka_name} - ${schedule.train_id}`
     },
     {
       icon: 'mdi:clock-outline',
-      content: `${schedule.time_est} WIB`,
+      content: `${schedule.time_est} WIB`
     },
     {
       icon: 'fa6-solid:route',
-      content: schedule.route_name,
-    },
+      content: schedule.route_name
+    }
   ]
 
   return (
@@ -26,7 +26,9 @@ const ScheduleCard = ({ schedule }: { schedule: TrainScheduleResponse }) => {
         {trainInformationList.map((item, index) => (
           <div key={index} className='flex items-center gap-2 text-default-500'>
             <Icon icon={item.icon} />
-            <p className='truncate w-[320px] text-xs'>{item.content}</p>
+            <p className='truncate w-[70%] sm:w-[80%] text-xs'>
+              {item.content}
+            </p>
           </div>
         ))}
       </div>

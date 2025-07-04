@@ -8,11 +8,11 @@ const fetchDetailTrainSchedule = async (params: {
 }): Promise<DetailTrainScheduleParams[]> => {
   const response = await axiosPublic.get('/schedule-train', {
     params: {
-      trainid: params.trainid,
+      trainid: params.trainid
     },
     headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-    },
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
+    }
   })
 
   return response.data.data
@@ -20,6 +20,6 @@ const fetchDetailTrainSchedule = async (params: {
 
 export const useDetailTrainSchedule = () => {
   return useMutation({
-    mutationFn: fetchDetailTrainSchedule,
+    mutationFn: fetchDetailTrainSchedule
   })
 }

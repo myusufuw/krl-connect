@@ -5,7 +5,7 @@ import {
   NavbarMenuToggle,
   NavbarBrand,
   NavbarItem,
-  NavbarMenuItem,
+  NavbarMenuItem
 } from '@heroui/navbar'
 import { Button } from '@heroui/button'
 import { Kbd } from '@heroui/kbd'
@@ -23,7 +23,7 @@ import {
   DiscordIcon,
   HeartFilledIcon,
   SearchIcon,
-  Logo,
+  Logo
 } from '@/app/components/icons'
 
 export const Navbar = () => {
@@ -32,7 +32,7 @@ export const Navbar = () => {
       aria-label='Search'
       classNames={{
         inputWrapper: 'bg-default-100',
-        input: 'text-sm',
+        input: 'text-sm'
       }}
       endContent={
         <Kbd className='hidden lg:inline-block' keys={['command']}>
@@ -63,7 +63,7 @@ export const Navbar = () => {
               <NextLink
                 className={clsx(
                   linkStyles({ color: 'foreground' }),
-                  'data-[active=true]:text-primary data-[active=true]:font-medium',
+                  'data-[active=true]:text-primary data-[active=true]:font-medium'
                 )}
                 color='foreground'
                 href={item.href}

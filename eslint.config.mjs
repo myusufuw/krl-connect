@@ -109,6 +109,7 @@ export default defineConfig([
           jsxSingleQuote: true,
           semi: false,
           endOfLine: 'auto',
+          trailingComma: 'none',
         },
       ],
 

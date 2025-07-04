@@ -3,12 +3,12 @@ import { useMutation } from '@tanstack/react-query'
 import {
   TrainScheduleParams,
   TrainScheduleParamsSchema,
-  TrainScheduleResponse,
+  TrainScheduleResponse
 } from '../schemas/commuter-schedule'
 import axiosPublic from '../api/axios'
 
 const fetchTrainSchedule = async (
-  params: TrainScheduleParams,
+  params: TrainScheduleParams
 ): Promise<TrainScheduleResponse[]> => {
   const parsed = TrainScheduleParamsSchema.safeParse(params)
 
@@ -22,11 +22,11 @@ const fetchTrainSchedule = async (
     params: {
       stationid,
       timefrom,
-      timeto,
+      timeto
     },
     headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-    },
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
+    }
   })
 
   return response.data.data
@@ -34,6 +34,6 @@ const fetchTrainSchedule = async (
 
 export const useTrainSchedule = () => {
   return useMutation({
-    mutationFn: fetchTrainSchedule,
+    mutationFn: fetchTrainSchedule
   })
 }

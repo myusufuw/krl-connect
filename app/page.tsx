@@ -1,14 +1,16 @@
 'use client'
 
 import React, { useState } from 'react'
+import clsx from 'clsx'
 
 import { useKrlStation } from './hooks/useKrlStation'
 import {
   TrainScheduleParams,
-  TrainScheduleParamsSchema,
+  TrainScheduleParamsSchema
 } from './schemas/commuter-schedule'
 import { useTrainSchedule } from './hooks/useTrainSchedule'
 import { useToastOnError } from './hooks/useToastOnError'
+import { useAppContext } from './context/app-context'
 
 import Loading from '@/app/components/loading'
 import ScheduleCard from '@/app/components/schedule-card'
@@ -20,15 +22,18 @@ export default function Home() {
     data: krlStationData,
     isLoading: isKrlStationLoading,
     isError: isKrlStationError,
-    error: krlStationError,
+    error: krlStationError
   } = useKrlStation()
+
   const {
     mutate,
     data: trainSchedules,
     isPending,
     isError: isTrainScheduleError,
-    error: trainScheduleError,
+    error: trainScheduleError
   } = useTrainSchedule()
+
+  const { isSearchPanelExpanded, setIsSearchPanelExpanded } = useAppContext()
 
   useToastOnError(trainScheduleError, isTrainScheduleError)
   useToastOnError(krlStationError, isKrlStationError)
@@ -37,22 +42,27 @@ export default function Home() {
     useState<TrainScheduleParams>({
       stationid: '',
       timefrom: '',
-      timeto: '',
+      timeto: ''
     })
 
   const handleFormObjectChange = (name: string, value: React.Key | null) => {
     setSearchScheduleFormObject((current) => ({
       ...current,
-      [name]: value,
+      [name]: value
     }))
   }
 
   const isSearchFormValid = TrainScheduleParamsSchema.safeParse(
-    searchScheduleFormObject,
+    searchScheduleFormObject
   ).success
 
   const handleSearchButtonClick = () => {
-    mutate(searchScheduleFormObject)
+    mutate(searchScheduleFormObject, {
+      onSuccess: () =>
+        setTimeout(() => {
+          setIsSearchPanelExpanded(false)
+        }, 1000)
+    })
   }
 
   return (
@@ -71,7 +81,14 @@ export default function Home() {
       />
 
       {/* SCHEDULE LIST */}
-      <div className='mt-[22vh] w-full px-4 h-[100%] pb-[90px] sm:pb-[30px] flex flex-col gap-4 justify-center items-center overflow-hidden'>
+      <div
+        className={clsx(
+          'w-full px-4 h-[100%] flex flex-col gap-4 justify-center items-center overflow-hidden transition-all duration-500',
+          isSearchPanelExpanded
+            ? 'mt-[23vh] sm:pb-[90px] pb-[100px]'
+            : 'mt-[10vh] pb-[80px] sm:pb-[18px]'
+        )}
+      >
         {isPending ? (
           <Loading />
         ) : (
