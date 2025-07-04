@@ -1,8 +1,7 @@
 'use client'
 
-import CommuterSearchPanel from '@/app/components/commuter-seacrh-panel'
-import Greeting from '@/app/components/greeting'
 import React, { useState } from 'react'
+
 import { useKrlStation } from '../hooks/useKrlStation'
 import { useToastOnError } from '../hooks/useToastOnError'
 import {
@@ -10,6 +9,9 @@ import {
   TicketPrice as TypeTicketPrice,
 } from '../schemas/ticket-price'
 import { useTicketPrice } from '../hooks/useTicketPrice'
+
+import Greeting from '@/app/components/greeting'
+import CommuterSearchPanel from '@/app/components/commuter-seacrh-panel'
 import TicketPriceCard from '@/app/components/ticket-price-card'
 
 const TicketPrice = () => {
@@ -58,14 +60,14 @@ const TicketPrice = () => {
 
       {/* SEARCH PANEL */}
       <CommuterSearchPanel
-        isKrlStationLoading={isKrlStationLoading}
         handleFormObjectChange={handleFormObjectChange}
         handleSubmitButtonClick={handleCheckTicketPrice}
-        krlStationData={krlStationData}
-        isSubmitButtonEnabled={isCheckTicketPriceFormValid}
         isButtonSubmitLoading={isPending}
-        variant='ticket-price'
+        isKrlStationLoading={isKrlStationLoading}
+        isSubmitButtonEnabled={isCheckTicketPriceFormValid}
+        krlStationData={krlStationData}
         title='Find the Best Fares for Your Journey'
+        variant='ticket-price'
       />
 
       {/* SCHEDULE PRICE */}

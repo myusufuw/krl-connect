@@ -1,6 +1,7 @@
 'use client'
 
 import clsx from 'clsx'
+
 import Greeting from '../components/greeting'
 import Loading from '../components/loading'
 import { useCommuterMap } from '../hooks/useCommuterMap'
@@ -8,6 +9,7 @@ import { useToastOnError } from '../hooks/useToastOnError'
 
 const CommuterMap = () => {
   const { data, isLoading, error, isError } = useCommuterMap()
+
   useToastOnError(error, isError)
 
   return (
@@ -19,7 +21,7 @@ const CommuterMap = () => {
       <div
         className={clsx(
           'flex flex-col flex-1 pb-[100px] sm:pb-5 overflow-y-auto px-3 no-scrollbar gap-4 mt-4',
-          isLoading && 'justify-center items-center'
+          isLoading && 'justify-center items-center',
         )}
       >
         {isLoading ? (
@@ -29,9 +31,9 @@ const CommuterMap = () => {
             {data?.map((item, index) => (
               <img
                 key={index}
-                src={item.permalink}
                 alt={`Area ${item.area}`}
                 className='border rounded-lg shadow-md'
+                src={item.permalink}
               />
             ))}
 

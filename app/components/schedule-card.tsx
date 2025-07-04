@@ -1,7 +1,8 @@
-import { TrainScheduleResponse } from '@/app/schemas/commuter-schedule'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import React from 'react'
+
+import { TrainScheduleResponse } from '@/app/schemas/commuter-schedule'
 
 const ScheduleCard = ({ schedule }: { schedule: TrainScheduleResponse }) => {
   const trainInformationList = [
@@ -30,8 +31,8 @@ const ScheduleCard = ({ schedule }: { schedule: TrainScheduleResponse }) => {
         ))}
       </div>
       <Link
-        href={`/detail-schedule?commuterName=${schedule.ka_name}&commuterId=${schedule.train_id}`}
         className='transform -rotate-90 absolute -right-7 top-7 rounded-b-md w-[97px] text-white py-2 flex items-center justify-center'
+        href={`/detail-schedule?commuterName=${schedule.ka_name}&commuterId=${schedule.train_id}`}
         style={{ backgroundColor: schedule.color }}
       >
         DETAIL

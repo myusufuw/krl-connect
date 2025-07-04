@@ -99,12 +99,18 @@ export default defineConfig([
       'react-hooks/exhaustive-deps': 'off',
       'jsx-a11y/click-events-have-key-events': 'warn',
       'jsx-a11y/interactive-supports-focus': 'warn',
-      'prettier/prettier': 'warn',
       'no-unused-vars': 'off',
       'unused-imports/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'warn',
-      quotes: ['warn', 'single', { avoidEscape: true }],
-      'prettier/prettier': ['warn', { singleQuote: true, semi: 'false' }],
+      'prettier/prettier': [
+        'error',
+        {
+          singleQuote: true,
+          jsxSingleQuote: true,
+          semi: false,
+          endOfLine: 'auto',
+        },
+      ],
 
       '@typescript-eslint/no-unused-vars': [
         'warn',

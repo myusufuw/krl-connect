@@ -1,9 +1,12 @@
 export function generateHourlyStrings() {
   const hours = []
+
   for (let i = 0; i < 24; i++) {
     const hourString = i.toString().padStart(2, '0') + ':00'
+
     hours.push({ value: hourString })
   }
+
   return hours
 }
 

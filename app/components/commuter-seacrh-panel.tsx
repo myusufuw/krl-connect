@@ -1,12 +1,13 @@
 import React from 'react'
-import { generateHourlyStrings } from '@/app/lib/time'
-import { KrlStation } from '@/app/schemas/commuter-schedule'
 import {
   Autocomplete,
   AutocompleteItem,
   AutocompleteSection,
 } from '@heroui/autocomplete'
 import { Button } from '@heroui/button'
+
+import { generateHourlyStrings } from '@/app/lib/time'
+import { KrlStation } from '@/app/schemas/commuter-schedule'
 
 type CommuterSearchPanelProps = {
   isKrlStationLoading: boolean
@@ -49,17 +50,17 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
 
       <Autocomplete
         fullWidth
-        size='sm'
         className='mt-4'
+        isLoading={isKrlStationLoading}
+        label={isHomePageVariant ? 'Select the station' : 'From'}
         scrollShadowProps={{
           isEnabled: false,
         }}
-        label={isHomePageVariant ? 'Select the station' : 'From'}
-        isLoading={isKrlStationLoading}
+        size='sm'
         onSelectionChange={(value) =>
           handleFormObjectChange(
             isHomePageVariant ? 'stationid' : 'stationfrom',
-            value
+            value,
           )
         }
       >
@@ -67,8 +68,8 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
           krlStationData.map((data) => (
             <AutocompleteSection
               key={data?.title}
-              title={data?.title}
               items={data?.value}
+              title={data?.title}
             >
               {(stations) => (
                 <AutocompleteItem
@@ -88,13 +89,13 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
       {!isHomePageVariant && (
         <Autocomplete
           fullWidth
-          size='sm'
           className='mt-4 mb-4'
+          isLoading={isKrlStationLoading}
+          label='To'
           scrollShadowProps={{
             isEnabled: false,
           }}
-          label='To'
-          isLoading={isKrlStationLoading}
+          size='sm'
           onSelectionChange={(value) =>
             handleFormObjectChange('stationto', value)
           }
@@ -103,8 +104,8 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
             krlStationData.map((data) => (
               <AutocompleteSection
                 key={data?.title}
-                title={data?.title}
                 items={data?.value}
+                title={data?.title}
               >
                 {(stations) => (
                   <AutocompleteItem
@@ -126,13 +127,13 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
         <div className='flex flex-row w-full justify-between gap-4 my-4'>
           <Autocomplete
             fullWidth
-            size='sm'
             defaultItems={generateHourlyStrings()}
             label='Start'
-            onInputChange={(value) => handleFormObjectChange('timefrom', value)}
             scrollShadowProps={{
               isEnabled: false,
             }}
+            size='sm'
+            onInputChange={(value) => handleFormObjectChange('timefrom', value)}
           >
             {(item) => (
               <AutocompleteItem key={item.value} textValue={item.value}>
@@ -143,13 +144,13 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
 
           <Autocomplete
             fullWidth
-            size='sm'
             defaultItems={generateHourlyStrings()}
             label='End'
-            onInputChange={(value) => handleFormObjectChange('timeto', value)}
             scrollShadowProps={{
               isEnabled: false,
             }}
+            size='sm'
+            onInputChange={(value) => handleFormObjectChange('timeto', value)}
           >
             {(item) => (
               <AutocompleteItem key={item.value}>{item.value}</AutocompleteItem>
@@ -159,13 +160,13 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
       )}
 
       <Button
-        color='primary'
         fullWidth
-        size='lg'
-        radius='md'
+        color='primary'
         isDisabled={!isSubmitButtonEnabled}
-        onPress={handleSubmitButtonClick}
         isLoading={isButtonSubmitLoading}
+        radius='md'
+        size='lg'
+        onPress={handleSubmitButtonClick}
       >
         {isHomePageVariant ? 'Search Commuter Line' : 'Submit'}
       </Button>

@@ -5,7 +5,7 @@ import { AxiosError } from 'axios'
 export function useToastOnError(
   error: unknown,
   isError: boolean,
-  fallbackMessage = 'Something went wrong'
+  fallbackMessage = 'Something went wrong',
 ) {
   useEffect(() => {
     if (!isError || !error) return

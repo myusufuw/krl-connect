@@ -1,6 +1,7 @@
-import { getTimeOfDay } from '@/app/lib/time'
 import React from 'react'
 import moment from 'moment'
+
+import { getTimeOfDay } from '@/app/lib/time'
 
 const Greeting = ({ descipription }: { descipription?: string }) => {
   return (
@@ -14,7 +15,7 @@ const Greeting = ({ descipription }: { descipription?: string }) => {
 
       {descipription && (
         <p className='mt-6 w-[365px] text-center text-default-200 font-medium text-2xl'>
-          "{descipription}"
+          &quot;{descipription}&quot;
         </p>
       )}
     </div>
