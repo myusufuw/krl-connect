@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
+
 import {
   TrainScheduleParams,
   TrainScheduleParamsSchema,
@@ -7,7 +8,7 @@ import {
 import axiosPublic from '../api/axios'
 
 const fetchTrainSchedule = async (
-  params: TrainScheduleParams
+  params: TrainScheduleParams,
 ): Promise<TrainScheduleResponse[]> => {
   const parsed = TrainScheduleParamsSchema.safeParse(params)
 

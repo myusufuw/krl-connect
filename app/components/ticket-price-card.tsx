@@ -1,5 +1,6 @@
-import { TicketPriceResponse } from '@/app/schemas/ticket-price'
 import React from 'react'
+
+import { TicketPriceResponse } from '@/app/schemas/ticket-price'
 
 const TicketPriceCard = (props: {
   ticketPriceData: TicketPriceResponse | undefined

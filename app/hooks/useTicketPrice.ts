@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
+
 import {
   TicketPrice,
   TicketPriceResponse,
@@ -7,7 +8,7 @@ import {
 import axiosPublic from '../api/axios'
 
 const fetchTicketPrice = async (
-  params: TicketPrice
+  params: TicketPrice,
 ): Promise<TicketPriceResponse[]> => {
   const parsed = TicketPriceSchema.safeParse(params)
 

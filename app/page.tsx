@@ -1,16 +1,18 @@
 'use client'
 
-import Greeting from '@/app/components/greeting'
-import { useKrlStation } from './hooks/useKrlStation'
 import React, { useState } from 'react'
+
+import { useKrlStation } from './hooks/useKrlStation'
 import {
   TrainScheduleParams,
   TrainScheduleParamsSchema,
 } from './schemas/commuter-schedule'
 import { useTrainSchedule } from './hooks/useTrainSchedule'
+import { useToastOnError } from './hooks/useToastOnError'
+
 import Loading from '@/app/components/loading'
 import ScheduleCard from '@/app/components/schedule-card'
-import { useToastOnError } from './hooks/useToastOnError'
+import Greeting from '@/app/components/greeting'
 import CommuterSearchPanel from '@/app/components/commuter-seacrh-panel'
 
 export default function Home() {
@@ -46,7 +48,7 @@ export default function Home() {
   }
 
   const isSearchFormValid = TrainScheduleParamsSchema.safeParse(
-    searchScheduleFormObject
+    searchScheduleFormObject,
   ).success
 
   const handleSearchButtonClick = () => {
@@ -60,12 +62,12 @@ export default function Home() {
 
       {/* SEARCH PANEL */}
       <CommuterSearchPanel
-        isKrlStationLoading={isKrlStationLoading}
         handleFormObjectChange={handleFormObjectChange}
         handleSubmitButtonClick={handleSearchButtonClick}
-        krlStationData={krlStationData}
-        isSubmitButtonEnabled={isSearchFormValid}
         isButtonSubmitLoading={isPending}
+        isKrlStationLoading={isKrlStationLoading}
+        isSubmitButtonEnabled={isSearchFormValid}
+        krlStationData={krlStationData}
       />
 
       {/* SCHEDULE LIST */}

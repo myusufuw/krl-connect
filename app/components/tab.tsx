@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -29,21 +29,21 @@ const Tab = () => {
       <div className='w-full flex justify-around'>
         {tabList.map((item, index) => (
           <Link
-            href={item.href}
             key={index}
             className={clsx(
               'w-[90px] flex h-[60px] justify-center items-center rounded-lg transition-all duration-500 transform',
-              path === item.href ? 'bg-primary-400' : ''
+              path === item.href ? 'bg-primary-400' : '',
             )}
+            href={item.href}
           >
             <Icon
               key={index}
-              icon={item.icon}
-              fontSize={48}
               className={clsx(
                 'cursor-pointer transition-colors duration-500',
-                path === item.href ? 'text-white' : 'text-blue-200'
+                path === item.href ? 'text-white' : 'text-blue-200',
               )}
+              fontSize={48}
+              icon={item.icon}
             />
           </Link>
         ))}
