@@ -10,8 +10,8 @@ type CommuterMapResponse = {
 const fetchCommuterMap = async (): Promise<CommuterMapResponse[]> => {
   const response = await axiosPublic.get('/routemap', {
     headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-    },
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
+    }
   })
 
   return response.data.data
@@ -22,6 +22,6 @@ export const useCommuterMap = () => {
     queryKey: ['commuter-map'],
     queryFn: fetchCommuterMap,
     staleTime: 1000 * 60 * 10,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: false
   })
 }

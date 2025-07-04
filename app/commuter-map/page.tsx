@@ -21,7 +21,7 @@ const CommuterMap = () => {
       <div
         className={clsx(
           'flex flex-col flex-1 pb-[100px] sm:pb-5 overflow-y-auto px-3 no-scrollbar gap-4 mt-4',
-          isLoading && 'justify-center items-center',
+          isLoading && 'justify-center items-center'
         )}
       >
         {isLoading ? (

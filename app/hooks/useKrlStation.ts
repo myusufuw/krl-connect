@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import axiosPublic from '../api/axios'
 import {
   KrlStationResponseSchema,
-  KrlStation,
+  KrlStation
 } from '../schemas/commuter-schedule'
 
 type currentGroup = {
@@ -48,6 +48,6 @@ export const useKrlStation = () => {
     queryKey: ['station-list'],
     queryFn: fetchStationList,
     staleTime: 1000 * 60 * 10,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: false
   })
 }
