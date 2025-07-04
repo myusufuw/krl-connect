@@ -1,6 +1,7 @@
 'use client'
 
 import clsx from 'clsx'
+import Image from 'next/image'
 
 import Greeting from '../components/greeting'
 import Loading from '../components/loading'
@@ -29,7 +30,7 @@ const CommuterMap = () => {
         ) : (
           <>
             {data?.map((item, index) => (
-              <img
+              <Image
                 key={index}
                 alt={`Area ${item.area}`}
                 className='border rounded-lg shadow-md'
