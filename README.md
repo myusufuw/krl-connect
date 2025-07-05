@@ -28,13 +28,13 @@ You can explore the UI/UX design of KRL Connect on Figma:
 
 - 🔍 **Effortless Schedule Search**: Quickly find train schedules between your desired departure and arrival stations.
 - 💸 **Instant Fare Calculation**: Get accurate and up-to-date ticket prices for your journey.
-- 🗺️ **Interactive Route Map**: Visually explore the entire KRL Commuter Line network with a user-friendly map.
+- 🗺️ **Route Map**: Visually explore the entire KRL Commuter Line network with a static map.
 - ⚡ **Real-Time Data**: All information is powered by the official [commuterline.id](https://commuterline.id/) API, ensuring accuracy.
 - 📱 **Fully Responsive**: Enjoy a seamless experience on both desktop and mobile devices.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stacks
 
 - 🧑‍💻 **Language**: TypeScript
 - ⚙️ **Framework**: Next.js
@@ -42,6 +42,7 @@ You can explore the UI/UX design of KRL Connect on Figma:
 - ✅ **Validation**: Zod
 - 🧹 **Linting**: ESLint
 - 🎨 **UI Components**: Hero UI
+- 🧠 **Design & Prototyping**: Figma
 - 🔌 **HTTP Client**: Axios
 - 🕒 **Date Handling**: Moment.js
 - ⚛️ **React Context**: For providing global values.
