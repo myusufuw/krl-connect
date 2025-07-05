@@ -21,7 +21,7 @@ const CommuterMap = () => {
       {/* ROUTE MAPS */}
       <div
         className={clsx(
-          'flex flex-col flex-1 pb-[100px] sm:pb-5 overflow-y-auto px-3 no-scrollbar gap-4 mt-4',
+          'flex flex-col flex-1 pb-[100px] sm:pb-5 overflow-y-auto px-3 no-scrollbar gap-4 mt-0 pt-4',
           isLoading && 'justify-center items-center'
         )}
       >
@@ -34,7 +34,11 @@ const CommuterMap = () => {
                 key={index}
                 alt={`Area ${item.area}`}
                 className='border rounded-lg shadow-md'
+                height={0}
+                sizes='100vw'
                 src={item.permalink}
+                style={{ width: '100%', height: 'auto' }}
+                width={0}
               />
             ))}
 

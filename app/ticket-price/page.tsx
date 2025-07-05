@@ -83,7 +83,7 @@ const TicketPrice = () => {
       <div
         className={clsx(
           'w-full px-4 flex flex-col items-center overflow-hidden transition-all duration-500',
-          isSearchPanelExpanded ? 'mt-[25vh]' : 'mt-[12vh]'
+          isSearchPanelExpanded ? 'mt-[27vh]' : 'mt-[14vh]'
         )}
       >
         {ticketPriceData && (
