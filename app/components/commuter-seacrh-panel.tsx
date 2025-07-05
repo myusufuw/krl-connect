@@ -68,12 +68,12 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
       <Autocomplete
         fullWidth
         className='mt-4'
+        inputProps={{ classNames: { input: 'text-base' } }}
         isLoading={isKrlStationLoading}
         label={isHomePageVariant ? 'Select the station' : 'From'}
         scrollShadowProps={{
           isEnabled: false
         }}
-        size='sm'
         onSelectionChange={(value) =>
           handleFormObjectChange(
             isHomePageVariant ? 'stationid' : 'stationfrom',
@@ -107,6 +107,7 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
         <Autocomplete
           fullWidth
           className='mt-4 mb-4'
+          inputProps={{ classNames: { input: 'text-base' } }}
           isLoading={isKrlStationLoading}
           label='To'
           scrollShadowProps={{
@@ -145,6 +146,7 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
           <Autocomplete
             fullWidth
             defaultItems={generateHourlyStrings()}
+            inputProps={{ classNames: { input: 'text-base' } }}
             label='Start'
             scrollShadowProps={{
               isEnabled: false
@@ -162,6 +164,7 @@ const CommuterSearchPanel = (props: CommuterSearchPanelProps) => {
           <Autocomplete
             fullWidth
             defaultItems={generateHourlyStrings()}
+            inputProps={{ classNames: { input: 'text-base' } }}
             label='End'
             scrollShadowProps={{
               isEnabled: false

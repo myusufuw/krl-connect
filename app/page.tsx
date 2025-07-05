@@ -83,7 +83,7 @@ export default function Home() {
       {/* SCHEDULE LIST */}
       <div
         className={clsx(
-          'w-full px-4 h-[100%] flex flex-col gap-4 justify-center items-center overflow-hidden transition-all duration-500',
+          'w-full px-4 h-[100%] flex flex-col gap-4 justify-center items-center overflow-hidden transition-all duration-500 pt-2',
           isSearchPanelExpanded
             ? 'mt-[23vh] sm:pb-[90px] pb-[100px]'
             : 'mt-[10vh] pb-[80px] sm:pb-[18px]'
