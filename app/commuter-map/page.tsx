@@ -32,6 +32,7 @@ const CommuterMap = () => {
             {data?.map((item, index) => (
               <Image
                 key={index}
+                unoptimized
                 alt={`Area ${item.area}`}
                 className='border rounded-lg shadow-md'
                 height={0}
