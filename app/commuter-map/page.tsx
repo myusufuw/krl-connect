@@ -36,7 +36,7 @@ const CommuterMap = () => {
                 className='border rounded-lg shadow-md'
                 height={0}
                 sizes='100vw'
-                src={item.permalink}
+                src={item.permalink.replace('http://', 'https://')}
                 style={{ width: '100%', height: 'auto' }}
                 width={0}
               />
