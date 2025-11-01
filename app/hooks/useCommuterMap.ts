@@ -8,7 +8,7 @@ type CommuterMapResponse = {
 }
 
 const fetchCommuterMap = async (): Promise<CommuterMapResponse[]> => {
-  const response = await axiosPublic.get('/krl-webs/v1/routemap', {
+  const response = await axiosPublic.get('/routemap', {
     headers: {
       Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
     }

@@ -18,7 +18,7 @@ const fetchTrainSchedule = async (
 
   const { stationid, timefrom, timeto } = parsed.data
 
-  const response = await axiosPublic.get('/krl-webs/v1/schedules', {
+  const response = await axiosPublic.get('/schedules', {
     params: {
       stationid,
       timefrom,

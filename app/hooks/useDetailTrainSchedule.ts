@@ -6,7 +6,7 @@ import { DetailTrainScheduleParams } from '../schemas/commuter-schedule'
 const fetchDetailTrainSchedule = async (params: {
   trainid: string | null
 }): Promise<DetailTrainScheduleParams[]> => {
-  const response = await axiosPublic.get('/krl-webs/v1/schedules-train', {
+  const response = await axiosPublic.get('/schedules-train', {
     params: {
       trainid: params.trainid
     },

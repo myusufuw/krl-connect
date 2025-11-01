@@ -12,7 +12,7 @@ type currentGroup = {
 }
 
 const fetchStationList = async () => {
-  const response = await axiosPublic.get('/krl-webs/v1/krl-station')
+  const response = await axiosPublic.get('/krl-station')
   const result = KrlStationResponseSchema.safeParse(response.data)
 
   if (!result.success) {

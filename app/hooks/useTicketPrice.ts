@@ -18,7 +18,7 @@ const fetchTicketPrice = async (
 
   const { stationfrom, stationto } = parsed.data
 
-  const response = await axiosPublic.get('/krl-webs/v1/fare', {
+  const response = await axiosPublic.get('/fare', {
     params: {
       stationfrom,
       stationto
